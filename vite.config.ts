@@ -11,11 +11,16 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 2000,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom"],
+        manualChunks: (id) => {
+          if (id.includes("node_modules")) {
+            if (id.includes("react")) {
+              return "react-vendor";
+            }
+            return "vendor";
+          }
         },
       },
     },
