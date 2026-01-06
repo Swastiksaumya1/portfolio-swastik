@@ -14,11 +14,10 @@ export default defineConfig(({ mode }) => ({
     chunkSizeWarningLimit: 2000,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
+        manualChunks(id) {
           if (id.includes("node_modules")) {
-            if (id.includes("react")) {
-              return "react-vendor";
-            }
+            if (id.includes("three") || id.includes("@react-three"))
+              return "vendor_three";
             return "vendor";
           }
         },

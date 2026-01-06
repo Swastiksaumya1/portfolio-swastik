@@ -13,6 +13,9 @@ export default defineConfig({
     outDir: "dist/server",
     target: "node22",
     ssr: true,
+    chunkSizeWarningLimit: 2000,
+    sourcemap: true,
+    minify: false,
     rollupOptions: {
       external: [
         // Node.js built-ins
@@ -38,8 +41,6 @@ export default defineConfig({
         entryFileNames: "[name].mjs",
       },
     },
-    minify: false, // Keep readable for debugging
-    sourcemap: true,
   },
   resolve: {
     alias: {
